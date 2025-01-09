@@ -3,47 +3,34 @@ import {
     StoredParamsResponse,
     paramsTypes,
 } from "../shared/ParamsInterface";
+import { update } from "./render";
+import { SVG, extend as SVGextend, Container, Rect } from "@svgdotjs/svg.js";
 
 export async function initialize(getStoredParams, setStoredParams) {
-    // EXAMPLE (USER INTERACTION)
-    /*
-    document.getElementById("svg")?.addEventListener("click", (event) => {
-        if (event.target === document.getElementById("circle")) {
-            setStoredParams({
-                circleBorder:
-                    getStoredParams().circleBorder === "red" ? "black" : "red",
+    class Rounded extends Rect {
+        // Create method to proportionally scale the rounded corners
+        size(width: number, height: number) {
+            return this.attr({
+                width: width,
+                height: height,
+                rx: height / 5,
+                ry: height / 5,
             });
         }
+    }
+
+    // Add a method to create a rounded rect
+    SVGextend(Container, {
+        rounded: function (width: number, height: number) {
+            return this.put(new Rounded()).size(width, height);
+        },
     });
-    */
+
+    return update({} as ParamsResponse);
 }
 
 export async function render(params: ParamsResponse, getStoredParams) {
-    const storedParams = getStoredParams() as StoredParamsResponse;
-    if (!!params.circleFill) {
-        document
-            .getElementById("circle")
-            ?.setAttribute("fill", params.circleFill);
-    }
-
-    if (!!params.rectFill) {
-        document.getElementById("rect")?.setAttribute("fill", params.rectFill);
-    }
-
-    if (!!params.triangleFill) {
-        document
-            .getElementById("triangle")
-            ?.setAttribute("fill", params.triangleFill);
-    }
-
-    // EXAMPLE (USER INTERACTION)
-    /*
-    if (!!storedParams.circleBorder) {
-        document
-            .getElementById("circle")
-            ?.setAttribute("stroke", storedParams.circleBorder);
-    }
-    */
+    return update(params);
 }
 
 export async function params() {
@@ -51,8 +38,5 @@ export async function params() {
 }
 
 export async function storedParams() {
-    return [
-        // // EXAMPLE (USER INTERACTION)
-        // { key: "circleBorder", type: "string" }
-    ];
+    return [];
 }

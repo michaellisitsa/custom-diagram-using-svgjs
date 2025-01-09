@@ -1,15 +1,7 @@
 export type ParamsResponse = {
-    circleFill: string;
-    rectFill: string;
-    triangleFill: string;
+    width: string;
 };
 
-export type StoredParamsResponse = {
-    circleBorder: string;
-};
+export type StoredParamsResponse = {};
 
-export const paramsTypes = [
-    { key: "circleFill", type: "string" },
-    { key: "rectFill", type: "string" },
-    { key: "triangleFill", type: "string" },
-];
+export const paramsTypes = [{ key: "width", type: "string" }];
