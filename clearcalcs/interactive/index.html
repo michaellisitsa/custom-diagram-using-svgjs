@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+            @import "reset.css";
+            @import "/src/interactive/main.scss";
+        </style>
+    </head>
+    <body>
+        <include src="src/interactive/main.html"></include>
+        <script type="module">
+            import start from "./start.ts";
+            start();
+        </script>
+    </body>
+</html>

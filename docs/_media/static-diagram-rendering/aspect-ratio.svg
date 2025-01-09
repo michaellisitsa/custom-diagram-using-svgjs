@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125 150">
+    <style>
+        :is(rect, line).dark-theme {
+            stroke: white;
+            stroke-width: 3;
+        }
+
+        text.dark-theme {
+            fill: white;
+        }
+        
+    </style>
+    <!-- Rectangle -->
+    <rect class="dark-theme" x="25" y="25" width="50" height="100" fill="transparent" />
+
+    <!-- Dimension line -->
+    <line class="dark-theme" x1="90" y1="25" x2="90" y2="125"/>
+    <line class="dark-theme" x1="85" y1="25" x2="95" y2="25"/>
+    <line class="dark-theme" x1="85" y1="125" x2="95" y2="125"/>
+
+    <!-- Dimension text -->
+    <text x="60" y="85" class="dark-theme" text-anchor="start" transform="rotate(-90,100,75)">H = 2W max</text>
+</svg>

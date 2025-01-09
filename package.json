@@ -1,0 +1,38 @@
+{
+    "name": "custom-diagram-boilerplate",
+    "version": "0.1.0",
+    "private": true,
+    "devDependencies": {
+        "@parcel/optimizer-data-url": "2.9.3",
+        "@parcel/transformer-inline-string": "2.9.3",
+        "@parcel/transformer-sass": "2.9.3",
+        "@parcel/core": "2.9.3",
+        "parcel": "2.9.3",
+        "posthtml-include": "1.7.4",
+        "esbuild": "^0.18.17",
+        "svgdom": "^0.1.14",
+        "@types/svgdom": "^0.1.2",
+        "buffer": "^6.0.3",
+        "string_decoder": "^1.3.0"
+    },
+    "targets": {
+        "default": {
+            "distDir": "./output"
+        }
+    },
+    "browserslist": [
+        "defaults",
+        "last 2 years",
+        "not dead"
+    ],
+    "scripts": {
+        "start": "parcel clearcalcs/interactive/**/index.html",
+        "test": "parcel clearcalcs/interactive/**/*.html --port 4321",
+        "compile-interactive": "parcel build clearcalcs/interactive/**/index.html",
+        "docs": "cd docs && npm install && docsify serve -p 4444",
+        "compile-static": "node static-build.js",
+        "compile-static-fonts": "node svgdomPatches/scripts/compileFont.js",
+        "compile-interactive-example": "EXAMPLE_PATH=examples/${EXAMPLE}/interactive/interface.ts parcel build examples/${EXAMPLE}/interactive/**/index.html"
+    },
+    "type": "module"
+}

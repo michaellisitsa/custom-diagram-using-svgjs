@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap");
+        </style>
+        <link rel="stylesheet" href="../reset.css" />
+        <link rel="stylesheet" href="test.scss" />
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="./assets/logo.svg" />
+            <h1>Custom Diagram Test Runner</h1>
+        </header>
+        <section class="iframe-wrapper">
+            <iframe
+                src="http://localhost:1234/index.html"
+                id="iframe"
+                referrerpolicy="origin"
+                sandbox="allow-scripts allow-same-origin"
+            ></iframe>
+        </section>
+        <article>
+            <div class="content-wrapper">
+                <div>
+                    <h2>Inputs</h2>
+                    <form id="postDataForm">
+                        <div class="form-row">
+                            <label for="method">Method </label>
+                            <select name="method" id="method">
+                                <option value="dimensions">dimensions</option>
+                                <option value="initialize">initialize</option>
+                                <option value="render" selected>render</option>
+                                <option value="params">params</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label for="input1">Data </label>
+                            <textarea id="input1" name="data"></textarea>
+                        </div>
+                        <div class="form-button-row">
+                            <button>Post</button>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    <h2>Output</h2>
+                    <div id="output"></div>
+                    <div class="form-button-row">
+                        <button id="clear" type="button" class="clear-button">
+                            Clear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <script src="./test.ts"></script>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+{
+    "name": "custom-diagram-boilerplate",
+    "version": "0.1.0",
+    "private": true,
+    "devDependencies": {
+        "docsify-cli": "^4.4.4"
+    }
+}

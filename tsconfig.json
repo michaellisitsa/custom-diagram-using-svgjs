@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "strict": true,
+        "noImplicitAny": false,
+        "noImplicitThis": false,
+        "incremental": true,
+        "moduleResolution": "node",
+    },
+    "include": [
+        "clearcalcs/**/*",
+        "src/**/*",
+        "custom.d.ts"
+    ]
+}
