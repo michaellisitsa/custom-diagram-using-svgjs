@@ -4,10 +4,11 @@ import {
     Container,
     Rect,
     Line,
+    Svg,
 } from "@svgdotjs/svg.js";
 
 type Options = {
-    canvas?: typeof SVG;
+    canvas?: Svg;
 };
 
 export function update(params, storedParams, options: Options = {}) {
