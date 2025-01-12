@@ -4,7 +4,13 @@ import {
     paramsTypes,
 } from "../shared/ParamsInterface";
 import { update } from "./render";
-import { SVG, extend as SVGextend, Container, Rect } from "@svgdotjs/svg.js";
+import {
+    SVG,
+    extend as SVGextend,
+    Container,
+    Rect,
+    Line,
+} from "@svgdotjs/svg.js";
 
 export async function initialize(getStoredParams, setStoredParams) {
     class Rounded extends Rect {
@@ -16,6 +22,19 @@ export async function initialize(getStoredParams, setStoredParams) {
                 rx: height / 5,
                 ry: height / 5,
             });
+        }
+
+        // Method to add a dashed line at a height just below the top of the shape
+        addDashedLine(thickness: number) {
+            const line = new Line()
+                .plot(0, thickness, this.attr("width"), thickness)
+                .stroke({
+                    color: "#000",
+                    width: 2,
+                    dasharray: "5,5",
+                });
+            this.parent()!.put(line);
+            return this;
         }
     }
 
