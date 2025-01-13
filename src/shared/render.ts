@@ -38,5 +38,19 @@ export function update(params, storedParams, options: Options) {
         .fill("none")
         .stroke("black");
 
+    const ShearPlateLength = 80;
+
+    const ShearPlateGroup = beamGroup.group().transform({
+        translate: [0, (beamDepth - ShearPlateLength) / 2],
+    });
+
+    const ShearPlate = ShearPlateGroup
+        // thickness, length
+        .ShearPlate(20, ShearPlateLength)
+        .fill("none")
+        .stroke("black")
+        // start, stop, numb
+        .addBoltLine(10, ShearPlateLength - 10, 5);
+
     return options.canvas?.svg();
 }
