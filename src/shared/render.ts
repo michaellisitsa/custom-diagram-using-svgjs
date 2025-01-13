@@ -8,32 +8,31 @@ type Options = {
     canvas: Svg;
 };
 
-const CANVAS_HEIGHT = 300;
-const CANVAS_WIDTH = 500;
-
 export function update(params, storedParams, options: Options) {
-    const draw = options.canvas;
-
-    draw.viewbox(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-
     const { columnDepth, columnFlangeTf, beamDepth, beamFlangeTf } =
         params || defaultParams;
+    const canvasHeight = 2 * beamDepth;
+    const canvasWidth = 3 * columnDepth;
+    const draw = options.canvas;
+
+    draw.viewbox(0, 0, canvasWidth, canvasHeight);
+
     const columnGroup = draw
         .group()
         .transform({ translate: [0, -columnDepth] })
         .rotate(90, 0, columnDepth);
     const column = columnGroup
-        .FlangedElevation(CANVAS_WIDTH, columnDepth)
+        .FlangedElevation(canvasHeight, columnDepth)
         .addFlange(columnFlangeTf, "top", "dashed")
         .addFlange(columnFlangeTf, "bottom", "dashed")
         .fill("none")
         .stroke("black");
 
     const beamGroup = draw.group().transform({
-        translate: [columnDepth, CANVAS_HEIGHT / 2 - beamDepth / 2],
+        translate: [columnDepth, canvasHeight / 2 - beamDepth / 2],
     });
     const beam = beamGroup
-        .FlangedElevation(CANVAS_WIDTH - columnDepth, beamDepth)
+        .FlangedElevation(canvasWidth - columnDepth, beamDepth)
         .addFlange(beamFlangeTf, "top", "solid")
         .addFlange(beamFlangeTf, "bottom", "solid")
         .fill("none")

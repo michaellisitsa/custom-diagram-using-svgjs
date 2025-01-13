@@ -24,7 +24,7 @@ export default class FlangedElevation extends Rect {
             )
             .stroke({
                 color: "#000",
-                width: 2,
+                width: 1,
                 dasharray: lineType === "dashed" ? "5,5" : "none",
             });
         this.parent()!.put(line);
