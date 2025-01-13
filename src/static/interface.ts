@@ -8,12 +8,10 @@ import {
 } from "../shared/ParamsInterface";
 import { update } from "../shared/render";
 
-// returns a window with a document and an svg root node
 const window = createSVGWindow();
 const document = window.document;
-// create canvas
-// register window and document
 registerWindow(window, document);
+
 const canvas = SVG(document.documentElement as SVGSVGElement);
 
 export function render(

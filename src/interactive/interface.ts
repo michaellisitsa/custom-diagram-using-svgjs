@@ -1,20 +1,24 @@
+import { SVG } from "@svgdotjs/svg.js";
 import {
     ParamsResponse,
     StoredParamsResponse,
+    defaultParams,
     paramsTypes,
 } from "../shared/ParamsInterface";
 import { update } from "../shared/render";
 
+const canvas = SVG().addTo("body");
+
 export async function initialize(getStoredParams, setStoredParams) {
     const storedParams = getStoredParams();
 
-    return update({} as ParamsResponse, storedParams);
+    return update(defaultParams, storedParams, { canvas });
 }
 
 export async function render(params: ParamsResponse, getStoredParams) {
     const storedParams = getStoredParams();
-
-    return update(params, storedParams);
+    canvas.clear();
+    return update(params, storedParams, { canvas });
 }
 
 export async function params() {

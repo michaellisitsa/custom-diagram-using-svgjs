@@ -1,63 +1,43 @@
-import {
-    SVG,
-    extend as SVGextend,
-    Container,
-    Rect,
-    Line,
-    Svg,
-} from "@svgdotjs/svg.js";
+import { SVG, Svg } from "@svgdotjs/svg.js";
+import { extend, Container } from "@svgdotjs/svg.js";
+// This extends SVG.js to included additional classes
+import "./models/index";
+import { defaultParams } from "./ParamsInterface";
 
 type Options = {
-    canvas?: Svg;
+    canvas: Svg;
 };
 
-export function update(params, storedParams, options: Options = {}) {
-    class Rounded extends Rect {
-        // Create method to proportionally scale the rounded corners
-        size(width: number, height: number) {
-            return this.attr({
-                width: width,
-                height: height,
-                rx: height / 5,
-                ry: height / 5,
-            });
-        }
+const CANVAS_HEIGHT = 300;
+const CANVAS_WIDTH = 500;
 
-        // Method to add a dashed line at a height just below the top of the shape
-        addDashedLine(thickness: number) {
-            const line = new Line()
-                .plot(0, thickness, this.attr("width"), thickness)
-                .stroke({
-                    color: "#000",
-                    width: 2,
-                    dasharray: "5,5",
-                });
-            this.parent()!.put(line);
-            return this;
-        }
-    }
+export function update(params, storedParams, options: Options) {
+    const draw = options.canvas;
 
-    // Add a method to create a rounded rect
-    SVGextend(Container, {
-        rounded: function (width: number, height: number) {
-            return this.put(new Rounded()).size(width, height);
-        },
+    draw.viewbox(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+
+    const { columnDepth, columnFlangeTf, beamDepth, beamFlangeTf } =
+        params || defaultParams;
+    const columnGroup = draw
+        .group()
+        .transform({ translate: [0, -columnDepth] })
+        .rotate(90, 0, columnDepth);
+    const column = columnGroup
+        .FlangedElevation(CANVAS_WIDTH, columnDepth)
+        .addFlange(columnFlangeTf, "top", "dashed")
+        .addFlange(columnFlangeTf, "bottom", "dashed")
+        .fill("none")
+        .stroke("black");
+
+    const beamGroup = draw.group().transform({
+        translate: [columnDepth, CANVAS_HEIGHT / 2 - beamDepth / 2],
     });
-
-    const draw = options?.canvas
-        ? options.canvas
-        : SVG().addTo("body").size(300, 300);
-    // Simple example
-
-    // Adding a group
-    var group = draw.group();
-    const path = group.path("M10,20L30,40");
-    const rounded = group
-        .rounded(200, 100)
-        .addDashedLine(10)
-        .addDashedLine(90)
-        .fill("green")
-        .move(10, 100);
+    const beam = beamGroup
+        .FlangedElevation(CANVAS_WIDTH - columnDepth, beamDepth)
+        .addFlange(beamFlangeTf, "top", "solid")
+        .addFlange(beamFlangeTf, "bottom", "solid")
+        .fill("none")
+        .stroke("black");
 
     return options.canvas?.svg();
 }
