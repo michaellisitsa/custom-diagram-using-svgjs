@@ -1,15 +1,22 @@
 export type ParamsResponse = {
-    circleFill: string;
-    rectFill: string;
-    triangleFill: string;
+    columnDepth: string;
+    columnFlangeTf: string;
+    beamDepth: string;
+    beamFlangeTf: string;
 };
 
-export type StoredParamsResponse = {
-    circleBorder: string;
-};
+export type StoredParamsResponse = {};
 
 export const paramsTypes = [
-    { key: "circleFill", type: "string" },
-    { key: "rectFill", type: "string" },
-    { key: "triangleFill", type: "string" },
+    { key: "columnDepth", type: "string" },
+    { key: "columnFlangeTf", type: "string" },
+    { key: "beamDepth", type: "string" },
+    { key: "beamFlangeTf", type: "string" },
 ];
+
+export const defaultParams = {
+    columnDepth: 100,
+    columnFlangeTf: 7,
+    beamDepth: 150,
+    beamFlangeTf: 12,
+};
