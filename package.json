@@ -5,7 +5,7 @@
     "devDependencies": {
         "@parcel/optimizer-data-url": "2.9.3",
         "@parcel/transformer-inline-string": "2.9.3",
-        "@parcel/transformer-sass": "2.9.3",
+        "@parcel/transformer-sass": "2.14.2",
         "@parcel/core": "2.9.3",
         "parcel": "2.9.3",
         "posthtml-include": "1.7.4",
